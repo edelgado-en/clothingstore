@@ -8,6 +8,7 @@ import "./category.styles.scss";
 import { useParams } from "react-router-dom";
 
 const Category = () => {
+  console.log("render/rendering category component");
   const { category } = useParams();
   const categoriesMap = useSelector(getCategoriesMap);
   const [products, setProducts] = useState(categoriesMap[category]);
