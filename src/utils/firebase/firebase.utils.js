@@ -22,14 +22,14 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAb1YBHoddNS3x4Nab_YTOPPzFwUwr5h6s",
-    authDomain: "clothing-db-a636d.firebaseapp.com",
-    projectId: "clothing-db-a636d",
-    storageBucket: "clothing-db-a636d.appspot.com",
-    messagingSenderId: "808787341463",
-    appId: "1:808787341463:web:b6c473dcbf2e43895eb9d2"
-};
-  
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
+}; 
+
 initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();

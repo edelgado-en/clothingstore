@@ -1,12 +1,8 @@
 import { createSelector } from "reselect";
 
-
-/* export const getCategoriesMap = createSelector(
-    [selectCategoriesReducer],
-    (categoriesSlice) => {
-        return Object.assign({}, categoriesSlice.categoriesMap);
-    }
-); */
+//Use memoization selector when non-related components are re-rendering when changing state in other components
+//Remember useSelector causes a component to re-render but ONLY when the object is different
+//And every time we fire a action in redux, ALL reducers get hit
 
 /**
  * This selector does not need memoization because it is not returning a new object every time like
