@@ -1,21 +1,17 @@
-import { useContext } from "react";
+import "./navigation.styles.scss";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
-
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
-import "./navigation.styles.scss";
-import { CartContext } from "../../context/cart.context";
-
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 const Navigation = () => {
   //useSelector allows me to read from the redux store. State is the whole object, then you access a specific value from a specific reducer
   const currentUser = useSelector(selectCurrentUser);
-
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     <>
