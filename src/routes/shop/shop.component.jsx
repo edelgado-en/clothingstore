@@ -16,7 +16,11 @@ const Shop = () => {
 
   useEffect(() => {
     const getCategoriesMap = async () => {
+      //without thunk you would have to put the loading flag here
+      //but what if you need to show the loading flag in other components or at the top of the app
+      //now you have a problem because how do you pass the loading state up and down components
       const categoriesMap = await getCategoriesAndDocuments();
+      //set loading flag to false
       dispatch(setCategoriesMap(categoriesMap));
     };
 
