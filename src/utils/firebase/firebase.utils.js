@@ -50,6 +50,7 @@ export const db = getFirestore();
 
 /**
  * Adds collection and documents in a transaction using writeBatch.
+ * We only used this function once to upload data to firestore. This is not used anymore
  * 
  * @param {*} collectionKey
  * @param {*} objectsToAdd 
@@ -80,13 +81,14 @@ export const getCategoriesAndDocuments = async () => {
     const querySnapshot = await getDocs(q);
     
     //convert an array of object into one object which is a map of key => items. Ex: key is 'hats' => array, 'jackets' => array
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+/*     const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
         const { title, items } = docSnapshot.data();
         acc[title.toLowerCase()] = items;
         return acc;
-      }, {});
+      }, {}); */
 
-    return categoryMap; 
+    //return categoryMap; 
+    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 }
 
 

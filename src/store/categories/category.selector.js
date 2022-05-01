@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from "reselect";// use for memoization
 
 //Use memoization selector when non-related components are re-rendering when changing state in other components
 //Remember useSelector causes a component to re-render but ONLY when the object is different
@@ -7,11 +7,17 @@ import { createSelector } from "reselect";
 /**
  * This selector does not need memoization because it is not returning a new object every time like
  * a reduce function would, or a clone object function would
- * 
+ *
  * @param {*} state the redux store state 
  * @returns the categories map from the categories reducer in the redux store
  */
-export const getCategoriesMap = (state) => state.categories.categoriesMap;
+//you should rename this to selectCategoriesMap because that is the convention
+//This works because it is called from a useSelector hook which hooks to the redux store. That's where the input
+//state in this function is coming from
+//SIMPLEST WAY TO ACCESS THE REDUX STORE. You use this in the useSelector hook
+//export const selectCategories = (state) => state.categories.categories;
+
+
 
 
 //if I were to return a new object like this. It will re-render the category component every time any 
@@ -40,3 +46,27 @@ export const getCategoriesMap = (state) => state.categories.categoriesMap;
         return Object.assign({}, categoriesSlice.categoriesMap); //so although this returns a new object, reselect will cache it and it will only fire off when the contents are actually different
     }
 ); */
+
+
+
+const selectCategoryReducer = (state) => state.categories;
+
+const selectCategories = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => categoriesSlice.categories
+);
+
+export const selectCategoriesMap = createSelector(
+  [selectCategories],
+  (categories) =>
+    categories.reduce((acc, category) => {
+      const { title, items } = category;
+      acc[title.toLowerCase()] = items;
+      return acc;
+    }, {})
+);
+
+export const selectCategoriesIsLoading = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => categoriesSlice.isLoading
+);

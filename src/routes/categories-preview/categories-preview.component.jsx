@@ -1,10 +1,14 @@
 import { useSelector } from "react-redux";
-import { getCategoriesMap } from "../../store/categories/category.selector";
+import {
+  selectCategoriesMap,
+  selectCategoriesIsLoading,
+} from "../../store/categories/category.selector";
 
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 
 const CategoriesPreview = () => {
-  const categoriesMap = useSelector(getCategoriesMap);
+  const categoriesMap = useSelector(selectCategoriesMap);
+  const isLoading = useSelector(selectCategoriesIsLoading);
 
   //PROPERTY ACCESSORS
   //const person2 = {
@@ -17,13 +21,16 @@ const CategoriesPreview = () => {
 
   return (
     <>
-      {Object.keys(categoriesMap).map((title) => (
-        <CategoryPreview
-          key={title}
-          title={title}
-          products={categoriesMap[title]}
-        />
-      ))}
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        Object.keys(categoriesMap).map((title) => {
+          const products = categoriesMap[title];
+          return (
+            <CategoryPreview key={title} title={title} products={products} />
+          );
+        })
+      )}
     </>
   );
 };

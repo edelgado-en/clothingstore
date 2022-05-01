@@ -32,7 +32,7 @@ const loggerMiddleware = (store) => (next) => (action) => {
 const persistConfig = {
     key: 'root', //persist the whole thing
     storage,
-    whitelist: ['car'] //you can also use a blacklist
+    whitelist: ['car'] //you can also use a blacklist. We only want to persist the cart reducer data
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

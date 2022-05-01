@@ -7,14 +7,14 @@ type SearchBoxProps = {
 }
 
 const SearchBox = ({ className, placeholder, onChangeHandler }: SearchBoxProps) => {
-   
+    return (
         <input 
             type="text"
             className={`search-box ${className}`}
             placeholder={placeholder}
             onChange={onChangeHandler}
         />
-   
+    )
 }
 
 export default SearchBox;
