@@ -1,4 +1,3 @@
-import { createImportSpecifier } from "typescript";
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
 const INITIAL_STATE = {

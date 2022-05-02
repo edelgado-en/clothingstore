@@ -12,6 +12,7 @@ import { rootReducer } from './root-reducer';
  * Write your own logger because redux-logger makes some extra calls to components
  * and it makes it confusing to understand why your component is being called twice sometimes.
  * @param {*} store 
+ * 
  * @returns 
  */
 const loggerMiddleware = (store) => (next) => (action) => {
